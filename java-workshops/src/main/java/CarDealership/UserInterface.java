@@ -206,8 +206,6 @@ public class UserInterface {
              odometer = vehicle.getOdometer();
              originalPrice = vehicle.getPrice();
         }
-//        Vehicle vehicle = vehicleList.get(0);
-//        double original = vehicleList.get(0).getPrice();
 
         Vehicle vehicle = new Vehicle(vinn,year,make,model,vehicleType,color,odometer,originalPrice);
         contractList.add(new LeaseContract(date,name,email,vehicle));
