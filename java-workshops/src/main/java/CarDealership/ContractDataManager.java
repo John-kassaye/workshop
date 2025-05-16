@@ -53,8 +53,8 @@ public class ContractDataManager {
                     String month = split[15];
 
                     Vehicle vehicle = new Vehicle(vin,year,make,model,vehicleType,color,odometer,price);
-                    contractList.add(new LeaseContract(date,name,email,vehicle,price));
-                } else if (split.length == 18) {
+                    contractList.add(new LeaseContract(date,name,email,vehicle));
+                } else if (split.length == 19) {
                     String sales = split[0];
                     String date = split[1];
                     String name = split[2];
@@ -73,9 +73,10 @@ public class ContractDataManager {
                     String totalPrice = split[15];
                     boolean finance = Boolean.parseBoolean(split[16]);
                     String month = split[17];
+                    String addOn = split[18];
 
                     Vehicle vehicle = new Vehicle(vin,year,make,model,vehicleType,color,odometer,price);
-                    contractList.add(new SalesContract(date,name,email,vehicle,finance,price));
+                    contractList.add(new SalesContract(date,name,email,vehicle,finance,addOn));
                 } else {
                     System.out.println("No no no!!!");
                 }

@@ -1,58 +1,39 @@
 package CarDealership;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LeaseContract extends Contract{
-    private double originalPrice;
-    private double expectedEndingValue;
-    private double leaseFee;
+    private final double expectedEndingValue = 0.5;
+    private final double leaseFee = 0.07;
     private Vehicle vehicle;
 
-    public LeaseContract(String date, String customerName, String customerEmail,
-                         Vehicle vehicleSold, double originalPrice) {
+    public LeaseContract(String date, String customerName, String customerEmail, Vehicle vehicleSold) {
         super(date, customerName, customerEmail, vehicleSold);
-        this.originalPrice = originalPrice;
-        this.expectedEndingValue = originalPrice * 0.5;
-        this.leaseFee = originalPrice * 0.07;
         this.vehicle = vehicleSold;
     }
 
     public Vehicle getVehicle() {
+
         return vehicle;
     }
 
-    public void setOriginalPrice(double originalPrice) {
-        this.originalPrice = originalPrice;
-    }
-
-    public void setExpectedEndingValue(double expectedEndingValue) {
-        this.expectedEndingValue = expectedEndingValue;
-    }
-
-    public void setLeaseFee(double leaseFee) {
-        this.leaseFee = leaseFee;
-    }
-
-    public double getOriginalPrice() {
-        return originalPrice;
-    }
-
     public double getExpectedEndingValue() {
-        return expectedEndingValue;
+        return getVehicleSold().getPrice() * expectedEndingValue;
     }
 
     public double getLeaseFee() {
-        return (double) Math.round(leaseFee);
+        return Math.floor(getVehicleSold().getPrice() * leaseFee);
     }
 
     @Override
     public double getTotalPrice() {
-        return originalPrice + leaseFee;
+        return getVehicleSold().getPrice() + getLeaseFee();
     }
 
     @Override
     public double getMonthlyPayment() {
-
-        double paymentPerYear = (getTotalPrice() * 0.04) * 3;
-        return (double) Math.round((getTotalPrice() + paymentPerYear) / 36);
+        return (double) Math.round((getTotalPrice() * (1 + 0.04) * 3) / 36);
     }
 
     @Override

@@ -210,12 +210,13 @@ public class UserInterface {
 //        double original = vehicleList.get(0).getPrice();
 
         Vehicle vehicle = new Vehicle(vinn,year,make,model,vehicleType,color,odometer,originalPrice);
-        contractList.add(new LeaseContract(date,name,email,vehicle,originalPrice));
+        contractList.add(new LeaseContract(date,name,email,vehicle));
 
         for (Contract contract : contractList){
             ContractDataManager.saveContract(contract);
         }
 
+        this.dealership.removeVehicle(vehicle);
         System.out.println("Successfully recorded");
     }
 
@@ -233,8 +234,21 @@ public class UserInterface {
         if (finance.equalsIgnoreCase("yes")){
             isFinance = true;
         }
+
         System.out.println("Enter the vin");
         String vin = scanner.nextLine();
+        System.out.println("""
+                        Add-Ons
+               
+               1: Nitrogen tires;
+               2: All-season floor mats;
+               3: Cargo tray;
+               4: Wheel locks
+               5: Window tinting
+               6: Splash guards
+               7: No thank you 😂
+               """);
+        String addOn = scanner.nextLine();
 
         List<Vehicle> vehicleList = this.dealership.getByVin(vin);
         List<Contract> contractList = new ArrayList<>();
@@ -260,13 +274,15 @@ public class UserInterface {
         }
 
         Vehicle vehicle = new Vehicle(vinn,year,make,model,vehicleType,color,odometer,originalPrice);
-        contractList.add(new SalesContract(date,name,email,vehicle,isFinance,originalPrice));
-
+//        contractList.add(new SalesContract(date,name,email,vehicle,isFinance,addOn));
+        contractList.add(new SalesContract(date,name,email,vehicle,isFinance,addOn));
 
         for (Contract contract : contractList){
             ContractDataManager.saveContract(contract);
         }
          this.dealership.removeVehicle(vehicle);
+
+        System.out.println("Successfully recorded");
 
     }
 }

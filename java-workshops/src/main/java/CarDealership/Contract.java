@@ -1,5 +1,8 @@
 package CarDealership;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Contract {
     private String date;
     private String customerName;
@@ -26,6 +29,10 @@ public abstract class Contract {
 
     public String getCustomerEmail() {
         return customerEmail;
+    }
+
+    public Vehicle getVehicleSold() {
+        return vehicleSold;
     }
 
     public abstract double getTotalPrice();
