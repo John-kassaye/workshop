@@ -274,7 +274,6 @@ public class UserInterface {
         }
 
         Vehicle vehicle = new Vehicle(vinn,year,make,model,vehicleType,color,odometer,originalPrice);
-//        contractList.add(new SalesContract(date,name,email,vehicle,isFinance,addOn));
         contractList.add(new SalesContract(date,name,email,vehicle,isFinance,addOn));
 
         for (Contract contract : contractList){
