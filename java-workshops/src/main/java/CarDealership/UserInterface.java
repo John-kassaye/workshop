@@ -1,5 +1,6 @@
 package CarDealership;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,7 +26,7 @@ public class UserInterface {
     }
 
     public void displayMenu() {
-        String menu = """
+        System.out.println( """
                 1 - Find vehicles within a price range
                 2 - Find vehicles by make / model
                 3 - Find vehicles by year range
@@ -35,9 +36,10 @@ public class UserInterface {
                 7 - List ALL vehicles
                 8 - Add a vehicle
                 9 - Remove a vehicle
+                10 - Sale
+                11 - Lease
                 99 - Quit
-                """;
-        System.out.println(menu);
+                """);
     }
 
     public boolean processUserChoice(int choice) {
@@ -72,7 +74,7 @@ public class UserInterface {
             case 99:
                 return false;
             default:
-                System.out.println("That's not a valid option");
+                System.out.println("Invalid option");
         }
         return true;
     }
@@ -150,9 +152,40 @@ public class UserInterface {
         this.dealership.removeVehicle(vehicle);
     }
 
+    public void processOfLease(){
+        System.out.println("Enter the vin");
+        String vin = scanner.nextLine();
+        this.dealership.getByVin(vin);
+    }
+
     private void displayVehicles(List<Vehicle> vehicleList) {
         for(Vehicle vehicle : vehicleList) {
             System.out.println(vehicle.toFileString());
         }
+    }
+
+    public void processLease(){
+        System.out.println(" Enter the date");
+        String date = scanner.nextLine();
+        System.out.println("Enter your name");
+        String name = scanner.nextLine();
+        System.out.println("Enter your Email");
+        String email = scanner.nextLine();
+        System.out.println("Enter the vin");
+        String vin = scanner.nextLine();
+
+        List<Contract> contractList = new ArrayList<>();
+        List<Vehicle> vehicleList = this.dealership.getByVin(vin);
+
+        Vehicle vehicle = vehicleList.get(0);
+        double original = vehicleList.get(0).getPrice();
+
+        contractList.add(new LeaseContract(date,name,email,vehicle,original));
+
+        for (Contract contract : contractList){
+            ContractDataManager.saveContract(contract);
+        }
+
+
     }
 }

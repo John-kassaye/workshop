@@ -123,4 +123,15 @@ public class Dealership {
         return name + "|" + address + "|" + phone;
     }
 
+    public List<Vehicle> getByVin(String vin){
+        List<Vehicle> vehicleList = new ArrayList<>();
+
+        for (Vehicle vehicle : inventory){
+            if (vehicle.getVin().equalsIgnoreCase(vin)){
+                vehicleList.add(vehicle);
+            }
+        }
+
+        return vehicleList;
+    }
 }
