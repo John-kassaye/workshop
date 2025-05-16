@@ -71,12 +71,16 @@ public class ContractDataManager {
                     String recordingFee = split[13];
                     String processingFee = split[14];
                     String totalPrice = split[15];
-                    boolean finance = Boolean.parseBoolean(split[16]);
+                    String finance = split[16];
                     String month = split[17];
                     String addOn = split[18];
 
+                    boolean finance1 = false;
+                    if (finance.equalsIgnoreCase("yes")){
+                        finance1 = true;
+                    }
                     Vehicle vehicle = new Vehicle(vin,year,make,model,vehicleType,color,odometer,price);
-                    contractList.add(new SalesContract(date,name,email,vehicle,finance,addOn));
+                    contractList.add(new SalesContract(date,name,email,vehicle,finance1,addOn));
                 } else {
                     System.out.println("No no no!!!");
                 }
