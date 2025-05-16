@@ -1,8 +1,5 @@
 package CarDealership;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LeaseContract extends Contract{
     private final double expectedEndingValue = 0.5;
     private final double leaseFee = 0.07;
@@ -14,7 +11,6 @@ public class LeaseContract extends Contract{
     }
 
     public Vehicle getVehicle() {
-
         return vehicle;
     }
 
@@ -42,5 +38,4 @@ public class LeaseContract extends Contract{
                 + getExpectedEndingValue() + "|" + getLeaseFee() + "|" + getTotalPrice() + "|" + getMonthlyPayment();
 
     }
-
 }

@@ -47,4 +47,6 @@ public abstract class Contract {
                 String.format("%-45s %s","Monthly payment",getMonthlyPayment());
 
     }
+
+    public abstract String toString();
 }
