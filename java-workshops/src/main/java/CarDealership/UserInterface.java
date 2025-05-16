@@ -38,6 +38,7 @@ public class UserInterface {
                 9 - Remove a vehicle
                 10 - Sale
                 11 - Lease
+                12 - Admin Access
                 99 - Quit
                 """);
     }
@@ -76,6 +77,9 @@ public class UserInterface {
                 break;
             case 11:
                 processLease();
+                break;
+            case 12:
+                AdminUserInterface.signInCheck();
                 break;
             case 99:
                 return false;
@@ -206,7 +210,6 @@ public class UserInterface {
 //        double original = vehicleList.get(0).getPrice();
 
         Vehicle vehicle = new Vehicle(vinn,year,make,model,vehicleType,color,odometer,originalPrice);
-
         contractList.add(new LeaseContract(date,name,email,vehicle,originalPrice));
 
         for (Contract contract : contractList){
