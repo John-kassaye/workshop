@@ -5,71 +5,64 @@ import java.util.Scanner;
 
 public class AdminUserInterface {
     static Scanner scanner = new Scanner(System.in);
+
     public static void signInCheck() {
+        System.out.println("Enter your password");
+        String password = scanner.nextLine();
 
-            System.out.println("Enter your password");
-            String password = scanner.nextLine();
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("admin password"))) {
+            String line = bufferedReader.readLine();
 
-            try (BufferedReader bufferedReader = new BufferedReader(new FileReader("admin password"))) {
-                String line = bufferedReader.readLine();
-
-                if (line.trim().equals(password)) {
-                    home();
-                } else {
-                    System.out.println("Incorrect user name or password");
-                }
-            } catch (IOException e) {
-                // Catch any file-related errors (like file not found) and show error message
-                System.out.println("Error");
-
+            if (line.trim().equals(password)) {
+                home();
+            } else {
+                System.out.println("Incorrect user name or password");
             }
+        } catch (IOException e) {
+            // Catch any file-related errors (like file not found) and show error message
+            System.out.println("Error");
         }
+    }
 
-        public static void home(){
-            System.out.println("""
-                    1: List All Contracts
-                    2: Only the Sales contracts
-                    3: Only the Lease contracts""");
-            String choice = scanner.nextLine();
-            switch (choice) {
-                case "1":
+    public static void home() {
+        System.out.println("""
+                1: List All Contracts
+                2: Only the Sales contracts
+                3: Only the Lease contracts""");
+        String choice = scanner.nextLine();
+        switch (choice) {
+            case "1":
                 getContract();
                 break;
-                case "2":
+            case "2":
                 getSalesContract();
                 break;
-                case "3":
+            case "3":
                 getLeaseContract();
                 break;
-                default:
-                    System.out.println("Invalid input");
-            }
+            default:
+                System.out.println("Invalid input");
         }
+    }
 
-        public static void getContract(){
+    public static void getContract() {
+        for (Contract contract : ContractDataManager.getContract()) {
+            System.out.println(contract.toString());
+        }
+    }
 
-        for (Contract contract : ContractDataManager.getContract()){
-            if (contract instanceof SalesContract){
-                SalesContract salesContract = (SalesContract) contract;
-                System.out.println(contract.toString());
-            } else if (contract instanceof LeaseContract) {
+    public static void getLeaseContract() {
+        for (Contract contract : ContractDataManager.getContract()) {
+            if (contract instanceof LeaseContract) {
                 LeaseContract leaseContract = (LeaseContract) contract;
                 System.out.println(contract.toString());
             }
         }
     }
 
-    public static void getLeaseContract(){
-        for (Contract contract : ContractDataManager.getContract()){
-            if (contract instanceof LeaseContract){
-                LeaseContract leaseContract = (LeaseContract) contract;
-                System.out.println(contract.toString());
-            }
-        }
-    }
-    public static void getSalesContract(){
-        for (Contract contract : ContractDataManager.getContract()){
-            if (contract instanceof SalesContract){
+    public static void getSalesContract() {
+        for (Contract contract : ContractDataManager.getContract()) {
+            if (contract instanceof SalesContract) {
                 SalesContract salesContract = (SalesContract) contract;
                 System.out.println(contract.toString());
             }

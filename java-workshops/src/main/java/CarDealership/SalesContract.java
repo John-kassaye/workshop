@@ -1,11 +1,6 @@
 package CarDealership;
 
-import java.util.List;
-
 public class SalesContract extends Contract{
-    private double taxAmount;
-    private double recordingFee;
-    private double processingFee;
     private boolean finance;
     private String addOnOptions;
     private Vehicle vehicle;

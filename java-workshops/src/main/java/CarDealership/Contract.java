@@ -39,14 +39,6 @@ public abstract class Contract {
 
     public abstract double getMonthlyPayment();
 
-    public String format(){
-        return String.format("%-45s %s","Date",getDate()) +
-                String.format("%-45s %s","Customer name",getCustomerName()) +
-                String.format("%-45s %s","Email",getCustomerEmail()) +
-                String.format("%-45s %s","Total price",totalPrice) +
-                String.format("%-45s %s","Monthly payment",getMonthlyPayment());
-
-    }
-
     public abstract String toString();
+
 }
