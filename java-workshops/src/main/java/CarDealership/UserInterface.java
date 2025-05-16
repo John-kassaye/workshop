@@ -216,7 +216,7 @@ public class UserInterface {
             ContractDataManager.saveContract(contract);
         }
 
-
+        System.out.println("Successfully recorded");
     }
 
     public void processSales(){
@@ -228,6 +228,7 @@ public class UserInterface {
         String email = scanner.nextLine();
         System.out.println("Financed? (yes/no)");
         String finance = scanner.nextLine();
+
        boolean isFinance = false;
         if (finance.equalsIgnoreCase("yes")){
             isFinance = true;

@@ -77,7 +77,7 @@ public class ContractDataManager {
                     Vehicle vehicle = new Vehicle(vin,year,make,model,vehicleType,color,odometer,price);
                     contractList.add(new SalesContract(date,name,email,vehicle,finance,price));
                 } else {
-                    System.out.println("No no no!!1");
+                    System.out.println("No no no!!!");
                 }
             }
         } catch (Exception e) {

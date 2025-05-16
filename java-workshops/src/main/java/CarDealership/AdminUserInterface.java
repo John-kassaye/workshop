@@ -26,11 +26,20 @@ public class AdminUserInterface {
         }
 
         public static void home(){
-            System.out.println(" 1: List All Contracts");
+            System.out.println("""
+                    1: List All Contracts
+                    2: Only the Sales contracts
+                    3: Only the Lease contracts""");
             String choice = scanner.nextLine();
             switch (choice) {
                 case "1":
                 getContract();
+                break;
+                case "2":
+                getSalesContract();
+                break;
+                case "3":
+                getLeaseContract();
                 break;
                 default:
                     System.out.println("Invalid input");
@@ -45,6 +54,23 @@ public class AdminUserInterface {
                 System.out.println(contract.toString());
             } else if (contract instanceof LeaseContract) {
                 LeaseContract leaseContract = (LeaseContract) contract;
+                System.out.println(contract.toString());
+            }
+        }
+    }
+
+    public static void getLeaseContract(){
+        for (Contract contract : ContractDataManager.getContract()){
+            if (contract instanceof LeaseContract){
+                LeaseContract leaseContract = (LeaseContract) contract;
+                System.out.println(contract.toString());
+            }
+        }
+    }
+    public static void getSalesContract(){
+        for (Contract contract : ContractDataManager.getContract()){
+            if (contract instanceof SalesContract){
+                SalesContract salesContract = (SalesContract) contract;
                 System.out.println(contract.toString());
             }
         }

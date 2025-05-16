@@ -40,7 +40,7 @@ public class LeaseContract extends Contract{
     }
 
     public double getLeaseFee() {
-        return leaseFee;
+        return (double) Math.round(leaseFee);
     }
 
     @Override
@@ -52,12 +52,13 @@ public class LeaseContract extends Contract{
     public double getMonthlyPayment() {
 
         double paymentPerYear = (getTotalPrice() * 0.04) * 3;
-        return (double) Math.round(getTotalPrice() + paymentPerYear) / 36;
+        return (double) Math.round((getTotalPrice() + paymentPerYear) / 36);
     }
 
     @Override
     public String toString(){
-        return "LEASE" + "|" + getDate() + "|" + getCustomerName() + "|" + getCustomerEmail() + "|" + getVehicle().toString() + "|" + getExpectedEndingValue() + "|" + getLeaseFee() + "|" + getTotalPrice() + "|" + getMonthlyPayment();
+        return "LEASE" + "|" + getDate() + "|" + getCustomerName() + "|" + getCustomerEmail() + "|" + getVehicle().toString() + "|"
+                + getExpectedEndingValue() + "|" + getLeaseFee() + "|" + getTotalPrice() + "|" + getMonthlyPayment();
 
     }
 
