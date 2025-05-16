@@ -93,6 +93,5 @@ public class SalesContract extends Contract{
     public String toString(){
         return "SALES" + "|" + getDate() + "|" + getCustomerName() + "|" + getCustomerEmail() + "|" + getVehicle().toString() + "|" + getTaxAmount() + "|"
                 + getRecordingFee() + "|" + getProcessingFee() + "|" + getTotalPrice() + "|" + getFinance() + "|" + getMonthlyPayment();
-
     }
 }
