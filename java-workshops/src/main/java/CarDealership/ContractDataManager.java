@@ -14,10 +14,10 @@ public class ContractDataManager {
            for (Contract contract1 : contractList){
                if (contract1 instanceof LeaseContract){
                    LeaseContract leaseContract = (LeaseContract) contract1;
-                   fileWriter.write(contract1.format());
+                   fileWriter.write("\n" + contract1.toString());
                } else if (contract1 instanceof SalesContract) {
                    SalesContract salesContract = (SalesContract) contract1;
-                   fileWriter.write(contract1.format());
+                   fileWriter.write("\n" + contract1.toString());
                }
            }
        } catch (Exception e) {

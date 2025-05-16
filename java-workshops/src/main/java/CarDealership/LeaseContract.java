@@ -4,6 +4,7 @@ public class LeaseContract extends Contract{
     private double originalPrice;
     private double expectedEndingValue;
     private double leaseFee;
+    private Vehicle vehicle;
 
     public LeaseContract(String date, String customerName, String customerEmail,
                          Vehicle vehicleSold, double originalPrice) {
@@ -11,6 +12,11 @@ public class LeaseContract extends Contract{
         this.originalPrice = originalPrice;
         this.expectedEndingValue = originalPrice * 0.5;
         this.leaseFee = originalPrice * 0.07;
+        this.vehicle = vehicleSold;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
     public void setOriginalPrice(double originalPrice) {
@@ -46,11 +52,13 @@ public class LeaseContract extends Contract{
     public double getMonthlyPayment() {
 
         double paymentPerYear = (getTotalPrice() * 0.04) * 3;
-        return getTotalPrice() + paymentPerYear / 36;
+        return (double) Math.round(getTotalPrice() + paymentPerYear) / 36;
     }
 
-    public String format(){
-        return getDate() + "|" + getCustomerName() + "|" + getCustomerEmail() + "|" + getMonthlyPayment() + "|" + getExpectedEndingValue() + "|" + getTotalPrice();
+    @Override
+    public String toString(){
+        return "LEASE" + "|" + getDate() + "|" + getCustomerName() + "|" + getCustomerEmail() + "|" + getVehicle().toString() + "|" + getExpectedEndingValue() + "|" + getLeaseFee() + "|" + getTotalPrice() + "|" + getMonthlyPayment();
 
     }
+
 }

@@ -6,6 +6,7 @@ public class SalesContract extends Contract{
     private double recordingFee;
     private double processingFee;
     private boolean finance;
+    private Vehicle vehicle;
 
     public SalesContract(String date, String customerName, String customerEmail, Vehicle vehicleSold,
                          boolean finance, double originalPrice) {
@@ -15,6 +16,11 @@ public class SalesContract extends Contract{
         this.recordingFee = 100;
         this.processingFee = originalPrice < 10000 ? 295 : 495;;
         this.taxAmount = originalPrice * 0.05;
+        this.vehicle = vehicleSold;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
     public double getOriginalPrice() {
@@ -57,6 +63,10 @@ public class SalesContract extends Contract{
         return finance;
     }
 
+    public String getFinance(){
+        return isFinance() ? "Yes" : "No";
+    }
+
     @Override
     public double getTotalPrice() {
         return originalPrice + taxAmount + recordingFee + processingFee;
@@ -65,19 +75,24 @@ public class SalesContract extends Contract{
     @Override
     public double getMonthlyPayment() {
 
-        double paymentPerYear = (getTotalPrice() * 0.0525) * 2;
-        double monthlyPayment = getTotalPrice() + paymentPerYear / 24;
+        double paymentPerYear = 0;
+        double monthlyPayment = 0;
 
         if (isFinance() && originalPrice > 10000){
              paymentPerYear = (getTotalPrice() * 0.0425) * 4;
-            monthlyPayment = getTotalPrice() + paymentPerYear / 48;
+            monthlyPayment = (getTotalPrice() + paymentPerYear) / 48;
+        } else if (isFinance()){
+             paymentPerYear = (getTotalPrice() * 0.0525) * 2;
+             monthlyPayment = (getTotalPrice() + paymentPerYear) / 24;
         }
-        return monthlyPayment;
+
+        return Math.round(monthlyPayment);
     }
 
     @Override
-    public String format(){
-        return getDate() + "|" + getCustomerName() + "|" + getCustomerEmail() + "|" + getMonthlyPayment() + "|" + isFinance() + "|" + getTotalPrice();
+    public String toString(){
+        return "SALES" + "|" + getDate() + "|" + getCustomerName() + "|" + getCustomerEmail() + "|" + getVehicle().toString() + "|" + getTaxAmount() + "|"
+                + getRecordingFee() + "|" + getProcessingFee() + "|" + getTotalPrice() + "|" + getFinance() + "|" + getMonthlyPayment();
 
     }
 }

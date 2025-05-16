@@ -71,6 +71,12 @@ public class UserInterface {
             case 9:
                 processRemoveVehicleRequest();
                 break;
+            case 10:
+                processSales();
+                break;
+            case 11:
+                processLease();
+                break;
             case 99:
                 return false;
             default:
@@ -152,11 +158,11 @@ public class UserInterface {
         this.dealership.removeVehicle(vehicle);
     }
 
-    public void processOfLease(){
-        System.out.println("Enter the vin");
-        String vin = scanner.nextLine();
-        this.dealership.getByVin(vin);
-    }
+//    public void processOfLease(){
+//        System.out.println("Enter the vin");
+//        String vin = scanner.nextLine();
+//        this.dealership.getByVin(vin);
+//    }
 
     private void displayVehicles(List<Vehicle> vehicleList) {
         for(Vehicle vehicle : vehicleList) {
@@ -174,18 +180,89 @@ public class UserInterface {
         System.out.println("Enter the vin");
         String vin = scanner.nextLine();
 
-        List<Contract> contractList = new ArrayList<>();
         List<Vehicle> vehicleList = this.dealership.getByVin(vin);
+        List<Contract> contractList = new ArrayList<>();
 
-        Vehicle vehicle = vehicleList.get(0);
-        double original = vehicleList.get(0).getPrice();
+        String vinn = "";
+        int year = 0;
+        String make = "";
+        String model = "";
+        String vehicleType = "";
+        String color = "";
+        int odometer = 0;
+        double originalPrice = 0;
 
-        contractList.add(new LeaseContract(date,name,email,vehicle,original));
+        for (Vehicle vehicle : vehicleList){
+             vinn = vehicle.getVin();
+             year = vehicle.getYear();
+             make = vehicle.getMake();
+             model = vehicle.getModel();
+             vehicleType = vehicle.getVehicleType();
+             color = vehicle.getColor();
+             odometer = vehicle.getOdometer();
+             originalPrice = vehicle.getPrice();
+        }
+//        Vehicle vehicle = vehicleList.get(0);
+//        double original = vehicleList.get(0).getPrice();
+
+        Vehicle vehicle = new Vehicle(vinn,year,make,model,vehicleType,color,odometer,originalPrice);
+
+        contractList.add(new LeaseContract(date,name,email,vehicle,originalPrice));
 
         for (Contract contract : contractList){
             ContractDataManager.saveContract(contract);
         }
 
+
+    }
+
+    public void processSales(){
+        System.out.println(" Enter the date");
+        String date = scanner.nextLine();
+        System.out.println("Enter your name");
+        String name = scanner.nextLine();
+        System.out.println("Enter your Email");
+        String email = scanner.nextLine();
+        System.out.println("Financed? (yes/no)");
+        String finance = scanner.nextLine();
+       boolean isFinance = false;
+        if (finance.equalsIgnoreCase("yes")){
+            isFinance = true;
+        }
+        System.out.println("Enter the vin");
+        String vin = scanner.nextLine();
+
+        List<Vehicle> vehicleList = this.dealership.getByVin(vin);
+        List<Contract> contractList = new ArrayList<>();
+
+        String vinn = "";
+        int year = 0;
+        String make = "";
+        String model = "";
+        String vehicleType = "";
+        String color = "";
+        int odometer = 0;
+        double originalPrice = 0;
+
+        for (Vehicle vehicle : vehicleList){
+            vinn = vehicle.getVin();
+            year = vehicle.getYear();
+            make = vehicle.getMake();
+            model = vehicle.getModel();
+            vehicleType = vehicle.getVehicleType();
+            color = vehicle.getColor();
+            odometer = vehicle.getOdometer();
+            originalPrice = vehicle.getPrice();
+        }
+
+        Vehicle vehicle = new Vehicle(vinn,year,make,model,vehicleType,color,odometer,originalPrice);
+        contractList.add(new SalesContract(date,name,email,vehicle,isFinance,originalPrice));
+
+
+        for (Contract contract : contractList){
+            ContractDataManager.saveContract(contract);
+        }
+         this.dealership.removeVehicle(vehicle);
 
     }
 }
