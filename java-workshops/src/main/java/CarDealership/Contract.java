@@ -37,5 +37,4 @@ public abstract class Contract {
     public abstract double getMonthlyPayment();
 
     public abstract String toString();
-
 }
